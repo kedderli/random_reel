@@ -1,0 +1,47 @@
+.wrapper {
+  position: relative;
+  width: 650px;
+  height: 650px;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.41);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.41);
+  }
+}
+
+.canvas {
+  position: relative;
+  transition: 8s cubic-bezier(0.4, -0.1, 0, 1.03);
+}
+
+.arrow {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  transform: translateX(-50%);
+  z-index: 100;
+  font-size: 80px;
+  color: #fff;
+}
