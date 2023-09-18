@@ -2,16 +2,19 @@ import { useState } from 'react';
 
 import styles from './App.module.scss';
 import OptionsInput from '../OptionsInput/OptionsInput';
-import Reel from '../Reel/Reel';
+import Wheel from '../Wheel/Wheel';
 import { Option } from '../../types/types';
 import { getRandomOptionid } from '../../utils/randomUtils';
 import { defaultRandomnessСoefficient } from '../../constants/randomConstants';
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils/localStorageUtils';
+import Winner from '../Winner/Winner';
 
 function App() {
   const [optionList, setOptionList] = useState<Option[]>(getFromLocalStorage());
   const [winner, setWinner] = useState(0);
   const [spinning, setSpinning] = useState(false);
+
+  const winnerValue = optionList.find((option) => option.id === winner)?.value;
 
   const editOptions = (value: Option[]) => {
     saveToLocalStorage(value);
@@ -19,7 +22,9 @@ function App() {
   };
 
   const onStartClick = () => {
-    if (spinning) {
+    const activeOptions = optionList.filter((option) => !option.disabled);
+
+    if (spinning || activeOptions.length < 2) {
       return;
     }
 
@@ -49,14 +54,17 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      <Reel optionList={optionList} winner={winner} onStartClick={onStartClick} />
-      <OptionsInput
-        optionList={optionList}
-        setOptionList={editOptions}
-        onStartClick={onStartClick}
-        winner={winner}
-        disabled={spinning}
-      />
+      <Wheel optionList={optionList} winner={winner} onStartClick={onStartClick} spinning={spinning} />
+      <div className={styles.sidePannel}>
+        <Winner winner={spinning ? undefined : winnerValue} />
+        <OptionsInput
+          optionList={optionList}
+          setOptionList={editOptions}
+          onStartClick={onStartClick}
+          winner={winner}
+          disabled={spinning}
+        />
+      </div>
     </div>
   );
 }

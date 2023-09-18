@@ -1,18 +1,20 @@
 .wrapper {
   position: relative;
-  width: 650px;
-  height: 650px;
-  cursor: pointer;
+  width: 600px;
+  height: 600px;
+  background-color: #281758;
+  border-radius: 50%;
 
   &:before {
     content: '';
     position: absolute;
-    width: 620px;
-    height: 620px;
-    background-color: #fff;
+    width: 590px;
+    height: 590px;
+    border: 10px solid #fff;
     border-radius: 50%;
     top: 50%;
     left: 50%;
+    z-index: 50;
     transform: translate(-50%, -50%);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.41);
   }
@@ -20,8 +22,8 @@
   &:after {
     content: '';
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: #fff;
     border-radius: 50%;
     top: 50%;
@@ -29,6 +31,10 @@
     transform: translate(-50%, -50%);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.41);
   }
+}
+
+.active {
+  cursor: pointer;
 }
 
 .canvas {
@@ -39,9 +45,10 @@
 .arrow {
   position: absolute;
   left: 50%;
-  top: -6px;
+  top: 0;
   transform: translateX(-50%);
   z-index: 100;
   font-size: 80px;
-  color: #fff;
+  border: 30px solid transparent;
+  border-top: 30px solid #fff;
 }

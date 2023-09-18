@@ -1,17 +1,18 @@
 import { useEffect, useRef } from 'react';
+import cn from 'classnames';
 import { Option } from '../../types/types';
-import styles from './Reel.module.scss';
+import styles from './Wheel.module.scss';
 import { drawWheel } from '../../utils/drawWheel';
 import { getRandomInt } from '../../utils/randomUtils';
-import { CaretDownOutlined } from '@ant-design/icons';
 
-interface IReelProps {
+interface IWheelProps {
   optionList: Option[];
   winner: number;
   onStartClick: () => void;
+  spinning: boolean;
 }
 
-export default function Reel({ optionList, winner, onStartClick }: IReelProps) {
+export default function Wheel({ optionList, winner, onStartClick, spinning }: IWheelProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const activeOptions = optionList.filter((option) => !option.disabled);
 
@@ -25,7 +26,7 @@ export default function Reel({ optionList, winner, onStartClick }: IReelProps) {
   }, [optionList]);
 
   useEffect(() => {
-    if (winner && canvasRef.current) {
+    if (spinning && winner && canvasRef.current) {
       const winnerIdx = activeOptions.findIndex((option) => option.id === winner);
       const oneOptionDeg = 360 / activeOptions.length;
       const prevPos = +canvasRef.current.style.transform.replace(/[^.\d]/g, '');
@@ -35,12 +36,12 @@ export default function Reel({ optionList, winner, onStartClick }: IReelProps) {
 
       canvasRef.current.style.transform = `rotate(${-newDeg}deg)`;
     }
-  }, [winner]);
+  }, [winner, spinning]);
 
   return (
-    <div className={styles.wrapper} onClick={onStartClick}>
-      <CaretDownOutlined className={styles.arrow} size={50} />
-      <canvas ref={canvasRef} height={650} width={650} className={styles.canvas} />
+    <div className={cn(styles.wrapper, { [styles.active]: !spinning })} onClick={onStartClick}>
+      <div className={styles.arrow} />
+      <canvas ref={canvasRef} height={600} width={600} className={styles.canvas} />
     </div>
   );
 }

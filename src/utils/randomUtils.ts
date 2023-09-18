@@ -15,7 +15,7 @@ export const getRandomOptionid = (optionList: Option[]): number => {
 
   let startPosition = 0;
 
-  const coefficientSumm = optionList.reduce((accum, option) => accum + option.randomnessСoefficient, 0);
+  const coefficientSumm = activeOptionList.reduce((accum, option) => accum + option.randomnessСoefficient, 0);
   const randomValue = getRandomInt(1, coefficientSumm);
 
   for (let i = 0; i < activeOptionList.length; i++) {
