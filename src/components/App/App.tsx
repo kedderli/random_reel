@@ -20,6 +20,7 @@ function App() {
     saveToLocalStorage(value);
     setOptionList(value);
   };
+  console.log(winnerValue);
 
   const onStartClick = () => {
     const activeOptions = optionList.filter((option) => !option.disabled);
@@ -44,9 +45,7 @@ function App() {
         return {
           ...option,
           randomnessСoefficient:
-            newWinner === option.id
-              ? defaultRandomnessСoefficient
-              : option.randomnessСoefficient * defaultRandomnessСoefficient,
+            newWinner === option.id ? defaultRandomnessСoefficient : option.randomnessСoefficient * 3,
         };
       }),
     );
