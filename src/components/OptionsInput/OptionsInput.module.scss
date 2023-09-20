@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 16px 8px 16px 16px;
+  padding: 16px 2px 16px 16px;
   width: 100%;
   box-sizing: border-box;
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
@@ -14,9 +14,11 @@
 
 .list {
   position: relative;
-  padding: 0;
+  padding: 0 14px 0 0;
   margin: 0 0 8px 0;
-  height: 55vh;
+  height: min(500px, 55vh);
+  box-sizing: border-box;
+  width: 100%;
   overflow-y: auto;
 }
 
@@ -25,10 +27,9 @@
   justify-content: flex-start;
   align-items: center;
   list-style-type: none;
-  margin-bottom: 8px;
 
-  &:last-child {
-    margin-bottom: 24px;
+  &:not(:last-child) {
+    margin-bottom: 8px;
   }
 
   & > *:not(:last-child) {
@@ -40,7 +41,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  width: calc(100% - 64px);
   & > *:not(:last-child) {
     margin-right: 4px;
   }
@@ -48,7 +50,14 @@
 
 .buttonsWrapper {
   display: flex;
-  width: 100%;
+  width: calc(100% - 14px);
   justify-content: space-around;
   align-items: center;
+  margin-right: 14px;
+}
+
+@media (max-width: 1000px) {
+  .list {
+    height: auto;
+  }
 }

@@ -107,7 +107,7 @@ export default function OptionsInput({ optionList, setOptionList, onStartClick, 
             }
           }}
           disabled={disabled}
-          placeholder="Новый пункт"
+          placeholder="Новый участник"
         />
         <Button onClick={onClickCreateNewOption} disabled={disabled}>
           <AppstoreAddOutlined />

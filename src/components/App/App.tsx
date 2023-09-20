@@ -20,7 +20,6 @@ function App() {
     saveToLocalStorage(value);
     setOptionList(value);
   };
-  console.log(winnerValue);
 
   const onStartClick = () => {
     const activeOptions = optionList.filter((option) => !option.disabled);

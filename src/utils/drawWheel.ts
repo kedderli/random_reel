@@ -48,7 +48,7 @@ export const drawWheel = (ctx: CanvasRenderingContext2D, options: Option[]) => {
     );
     ctx.rotate(angle + arc / 2 + Math.PI / 2 - 1.6);
     ctx.font = isBigLabel ? 'small-caps 22px Arial' : 'small-caps 32px Arial';
-    var text = options[i].value;
+    const text = options[i].value;
     ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
     ctx.restore();
   }

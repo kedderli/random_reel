@@ -8,12 +8,40 @@
   border-radius: 15px;
   font-size: 24px;
   margin-bottom: 16px;
-  padding: 16px 8px;
+  padding: 8px;
   min-height: 68px;
   box-sizing: border-box;
   width: 100%;
 }
 
+.question {
+  font-size: 14px;
+  padding: 8px 16px;
+  text-align: center;
+}
+
 .smallFont {
   font-size: 16px;
+}
+
+@media (max-width: 1000px) {
+  .block {
+    min-height: 92px;
+    font-size: 40px;
+  }
+
+  .smallFont {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 632px) {
+  .block {
+    min-height: 92px;
+    font-size: 6.6vw;
+  }
+
+  .smallFont {
+    font-size: 4.6vw;
+  }
 }
