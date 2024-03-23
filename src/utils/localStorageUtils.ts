@@ -46,3 +46,40 @@ export const getFromLocalStorage = (): Option[] => {
     return [];
   }
 };
+
+const dataKey = 'data';
+
+export const createShareLink = () : string  => {
+  const options = getFromLocalStorage()
+
+  const urlParams = new URLSearchParams();
+  urlParams.append(dataKey, JSON.stringify(options))
+
+  const { protocol, hostname, port, pathname } = window.location;
+  const modigiedPort = port ? `:${port}` : ''
+  const url =`${protocol}//${hostname}${modigiedPort}${pathname}?${urlParams.toString()}`;
+
+  return url;
+}
+
+export const parseShareLink = ():void => {
+  const params = new URLSearchParams(window.location.search)
+  const data = params.get(dataKey);
+
+  if (data) {
+    try {
+      const parsedData = JSON.parse(data);
+
+      if (isOptions(parsedData)) {
+        saveToLocalStorage(parsedData);
+
+        const url = new URL(window.location.href);
+        const {searchParams} = url;
+        searchParams.delete(dataKey);
+        window.location.replace(url.toString());
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}

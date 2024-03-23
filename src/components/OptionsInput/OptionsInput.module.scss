@@ -42,7 +42,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 8px;
-  width: calc(100% - 64px);
+  width: calc(100% - 14px);
   & > *:not(:last-child) {
     margin-right: 4px;
   }
@@ -54,6 +54,13 @@
   justify-content: space-around;
   align-items: center;
   margin-right: 14px;
+}
+
+.shareWrapper {
+  display: flex;
+  width: calc(100% - 14px);
+  justify-content: space-around;
+  margin-top: 8px;
 }
 
 @media (max-width: 1000px) {

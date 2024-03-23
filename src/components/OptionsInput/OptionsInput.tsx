@@ -1,10 +1,10 @@
-import styles from './OptionsInput.module.scss';
-import { Input } from 'antd';
-import { Button } from 'antd';
-import { Option } from '../../types/types';
+import { Input , Button } from 'antd';
 import { DeleteOutlined, PauseCircleOutlined, PlayCircleOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import { Option } from '../../types/types';
+import styles from './OptionsInput.module.scss';
 import { defaultRandomnessСoefficient } from '../../constants/randomConstants';
+import { createShareLink } from '../../utils/localStorageUtils';
 
 interface IOptionsInputProps {
   optionList: Option[];
@@ -66,10 +66,23 @@ export default function OptionsInput({ optionList, setOptionList, onStartClick, 
   };
 
   const onResetClick = () => {
+    // eslint-disable-next-line no-restricted-globals
     if (confirm('Вы уверены что хотите сбросить все шансы к начальным значениям?')) {
       setOptionList(optionList.map((option) => ({ ...option, randomnessСoefficient: defaultRandomnessСoefficient })));
     }
   };
+
+  const onShareClick = () => {
+    const url = createShareLink();
+
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        alert(`Ссылка скопирована в буфер обмена. \n\n ${url}`);
+      })
+      .catch(err => {
+        console.log('Something went wrong', err);
+      });
+  }
 
   return (
     <div className={styles.block}>
@@ -120,6 +133,11 @@ export default function OptionsInput({ optionList, setOptionList, onStartClick, 
         </Button>
         <Button onClick={onResetClick} disabled={disabled}>
           Сбросить шансы
+        </Button>
+      </div>
+      <div className={styles.shareWrapper}>
+        <Button onClick={onShareClick} disabled={disabled}>
+          Поделиться списком
         </Button>
       </div>
     </div>

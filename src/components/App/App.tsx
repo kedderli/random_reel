@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './App.module.scss';
 import OptionsInput from '../OptionsInput/OptionsInput';
@@ -6,7 +6,7 @@ import Wheel from '../Wheel/Wheel';
 import { Option } from '../../types/types';
 import { getRandomOptionid } from '../../utils/randomUtils';
 import { defaultRandomnessСoefficient } from '../../constants/randomConstants';
-import { getFromLocalStorage, saveToLocalStorage } from '../../utils/localStorageUtils';
+import { getFromLocalStorage, parseShareLink, saveToLocalStorage } from '../../utils/localStorageUtils';
 import Winner from '../Winner/Winner';
 
 function App() {
@@ -15,6 +15,10 @@ function App() {
   const [spinning, setSpinning] = useState(false);
 
   const winnerValue = optionList.find((option) => option.id === winner)?.value;
+
+  useEffect(() => {
+    parseShareLink();
+  }, []);
 
   const editOptions = (value: Option[]) => {
     saveToLocalStorage(value);
